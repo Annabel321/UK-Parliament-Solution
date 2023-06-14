@@ -1,0 +1,87 @@
+<h1>
+  Person Manager App
+</h1>
+
+<br>
+<br>
+
+<div class="container">
+  <h3>Add a new person</h3>
+  <form #myform="ngForm" (ngSubmit)="onUpdate(myform)">
+    <div class="form-group">
+      <label for="id">ID</label>
+      <input type="text" [(ngModel)]="model.id" class="form-control" name="id" required>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" [(ngModel)]="model.name" class="form-control" name="name" required minlength="3" #name="ngModel">
+    </div>
+
+    <div *ngIf="name.invalid && (name.dirty || name.touched)"
+         class="alert">
+
+      <div *ngIf="name.errors?.['required']">
+        Name is required.
+      </div>
+      <div *ngIf="name.errors?.['minlength']">
+        Name must be at least 3 characters long.
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="dob">Date of birth</label>
+      <input type="text" [(ngModel)]="model.dob" class="form-control" name="dob" required>
+    </div>
+
+    <div class="form-group">
+      <label for="postcode">Postcode</label>
+      <input type="text" [(ngModel)]="model.postcode" class="form-control" name="postcode" required minlength="7" #postcode="ngModel">
+    </div>
+
+    <div *ngIf="postcode.invalid && (postcode.dirty || postcode.touched)"
+         class="alert">
+
+      <div *ngIf="postcode.errors?.['required']">
+        Postcode is required.
+      </div>
+      <div *ngIf="postcode.errors?.['minlength']">
+        Postcode must be at least 7 characters long.
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="height">Height (in cm)</label>
+      <input type="text" [(ngModel)]="model.height" class="form-control" name="height" required>
+    </div>
+
+    <br>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+
+  </form>
+  <br>
+  <br>
+</div>
+
+<div>
+  <h3>List of people</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th *ngFor="let column of headers">
+          {{column}}
+        </th>
+      </tr>
+    </thead>
+    <tr *ngFor="let row of rows">
+      <td *ngFor="let column of headers">
+        {{row[column]}}
+      </td>
+    </tr>
+  </table>
+</div>
+<br>
+<br>
